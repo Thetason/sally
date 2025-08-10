@@ -35,6 +35,7 @@
 
 1. `index.html` 파일을 브라우저에서 열기
 2. 또는 웹 서버를 통해 호스팅
+3. GitHub Pages: https://thetason.github.io/sally/
 
 ## 👤 관리자 접속
 
@@ -45,3 +46,11 @@
 ## 📝 라이선스
 
 Private Project
+
+## 🔗 Live Demo
+
+[https://thetason.github.io/sally/](https://thetason.github.io/sally/)
+
+## 📅 Last Updated
+
+2024년 12월
