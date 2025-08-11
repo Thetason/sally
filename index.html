@@ -414,8 +414,68 @@
                         </p>
                     </div>
                     
-                    <!-- Features -->
-                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 mb-12 mt-24" data-aos="fade-up" data-aos-delay="400" data-aos-duration="1000">
+                    <!-- Program Overview Section -->
+                    <div class="max-w-5xl mx-auto my-16" data-aos="fade-up" data-aos-delay="400" data-aos-duration="1000">
+                        <div class="text-center mb-12">
+                            <h2 class="serif-font text-3xl sm:text-4xl font-bold mb-6" style="color: #2a472f;">
+                                새로운 나를 만나는 시간
+                            </h2>
+                            <p class="text-lg mb-8" style="color: #78856e;">
+                                바쁘게 달려온 나날들 속에서, 늘 뒷전이었던 '나'를 이제는 가장 먼저 생각할 시간입니다
+                            </p>
+                        </div>
+                        
+                        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center mb-12">
+                            <div class="space-y-6">
+                                <div class="flex items-start space-x-4">
+                                    <div class="flex-shrink-0">
+                                        <div class="w-12 h-12 rounded-full flex items-center justify-center" style="background-color: rgba(74, 93, 56, 0.1);">
+                                            <i class="fas fa-pen" style="color: #4a5d38;"></i>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <h3 class="font-semibold text-lg mb-2" style="color: #2a472f;">마음을 돌보는 글쓰기</h3>
+                                        <p style="color: #78856e;">고요한 숲속에서 내면의 목소리에 귀 기울이며, 마음속 이야기를 글로 풀어냅니다.</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="flex items-start space-x-4">
+                                    <div class="flex-shrink-0">
+                                        <div class="w-12 h-12 rounded-full flex items-center justify-center" style="background-color: rgba(120, 133, 110, 0.1);">
+                                            <i class="fas fa-spa" style="color: #78856e;"></i>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <h3 class="font-semibold text-lg mb-2" style="color: #2a472f;">자연 속 움직임과 호흡</h3>
+                                        <p style="color: #78856e;">처음이신 분들도 편안히 함께할 수 있는 부드러운 요가와 명상으로 몸과 마음을 깨웁니다.</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="flex items-start space-x-4">
+                                    <div class="flex-shrink-0">
+                                        <div class="w-12 h-12 rounded-full flex items-center justify-center" style="background-color: rgba(217, 119, 6, 0.1);">
+                                            <i class="fas fa-comments" style="color: #d97706;"></i>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <h3 class="font-semibold text-lg mb-2" style="color: #2a472f;">감정을 들여다보는 수업</h3>
+                                        <p style="color: #78856e;">전문 감정 코치와 함께 내 안의 감정을 이해하고, 건강하게 표현하는 방법을 배웁니다.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="relative">
+                                <img src="https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=600&h=400&fit=crop" 
+                                     alt="명상하는 사람" 
+                                     class="rounded-2xl shadow-2xl w-full"
+                                     onerror="this.src='https://placehold.co/600x400/E8F5E9/333333?text=Healing+Journey'"
+                                     style="border: 2px solid #ddd7c7;">
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Quick Features -->
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 mb-12" data-aos="fade-up" data-aos-delay="500" data-aos-duration="1000">
                         <div class="backdrop-blur-sm rounded-xl p-4 shadow-lg hover-card" style="background-color: rgba(221, 215, 199, 0.8);">
                             <i class="fas fa-leaf text-3xl mb-2" style="color: #4a5d38; background: linear-gradient(135deg, #4a5d38, #78856e); -webkit-background-clip: text; -webkit-text-fill-color: transparent;"></i>
                             <h3 class="font-semibold" style="color: #2a472f;">자연 속 힐링</h3>
@@ -434,8 +494,8 @@
                     </div>
                     
                     <!-- CTA Button -->
-                    <button onclick="scrollToSection('program')" class="premium-btn text-white font-bold py-5 px-12 rounded-full text-xl shadow-2xl pulse-glow transform hover:scale-110 transition-all duration-300" data-aos="zoom-in" data-aos-delay="600" data-aos-duration="1000">
-                        프로그램 자세히 보기 <i class="fas fa-arrow-down ml-2"></i>
+                    <button onclick="scrollToSection('schedule')" class="premium-btn text-white font-bold py-5 px-12 rounded-full text-xl shadow-2xl pulse-glow transform hover:scale-110 transition-all duration-300" data-aos="zoom-in" data-aos-delay="600" data-aos-duration="1000">
+                        힐링 여정 스케줄 보기 <i class="fas fa-arrow-down ml-2"></i>
                     </button>
                     
                     <!-- Scroll Down Indicator -->
@@ -576,7 +636,7 @@
         </section>
 
         <!-- Schedule -->
-        <section class="py-20 px-4 sm:px-6 lg:px-8">
+        <section id="schedule" class="py-20 px-4 sm:px-6 lg:px-8">
             <div class="container mx-auto max-w-6xl">
                 <div class="text-center mb-12" data-aos="fade-up">
                     <h2 class="serif-font text-3xl sm:text-4xl font-bold text-gray-800 mb-4">
