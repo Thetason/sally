@@ -20,12 +20,16 @@
     
     <style>
         :root {
-            --primary-green: #064e3b;
-            --secondary-green: #065f46;
-            --light-green: #ecfdf5;
-            --accent-gold: #a16207;
-            --warm-beige: #fef3c7;
-            --soft-gray: #f9fafb;
+            --primary-green: #2a472f;
+            --secondary-green: #4a5d38;
+            --light-green: #ddd7c7;
+            --accent-gold: #78856e;
+            --warm-beige: #ddd7c7;
+            --soft-gray: #f5f3f0;
+            --dark-forest: #2a472f;
+            --sage-green: #78856e;
+            --soft-beige: #ddd7c7;
+            --olive-green: #4a5d38;
         }
         
         * {
@@ -83,13 +87,13 @@
         @keyframes blink {
             0%, 100% { 
                 opacity: 1;
-                color: #d97706;
-                text-shadow: 0 0 10px rgba(217, 119, 6, 0.5);
+                color: #4a5d38;
+                text-shadow: 0 0 10px rgba(74, 93, 56, 0.5);
             }
             50% { 
                 opacity: 0.3;
-                color: #f59e0b;
-                text-shadow: 0 0 20px rgba(245, 158, 11, 0.8);
+                color: #78856e;
+                text-shadow: 0 0 20px rgba(120, 133, 110, 0.8);
             }
         }
         
@@ -98,10 +102,10 @@
             font-weight: 800;
         }
         
-        /* Ghibli-style background */
+        /* Natural earth-tone background */
         .ghibli-bg {
             position: relative;
-            background: linear-gradient(180deg, #e0f2fe 0%, #bae6fd 20%, #7dd3c0 60%, #86efac 100%);
+            background: linear-gradient(180deg, #ddd7c7 0%, #e8e3d3 30%, #c5bfb0 70%, #78856e 100%);
             overflow: hidden;
         }
         
@@ -129,7 +133,7 @@
         
         /* Premium button styles */
         .premium-btn {
-            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            background: linear-gradient(135deg, #4a5d38 0%, #2a472f 100%);
             transition: all 0.3s ease;
             position: relative;
             overflow: hidden;
@@ -152,7 +156,7 @@
         
         .premium-btn:hover {
             transform: translateY(-2px);
-            box-shadow: 0 10px 30px rgba(16, 185, 129, 0.3);
+            box-shadow: 0 10px 30px rgba(74, 93, 56, 0.3);
         }
         
         /* Card hover effects */
@@ -331,7 +335,7 @@
                 <div class="text-center max-w-4xl mx-auto">
                     <!-- Badge -->
                     <div data-aos="fade-down" data-aos-duration="1000">
-                        <span class="inline-block bg-gradient-to-r from-amber-400 to-amber-500 text-white px-8 py-4 rounded-full text-lg sm:text-xl font-bold shadow-2xl transform hover:scale-105 transition-transform duration-300">
+                        <span class="inline-block text-white px-8 py-4 rounded-full text-lg sm:text-xl font-bold shadow-2xl transform hover:scale-105 transition-transform duration-300" style="background: linear-gradient(135deg, #78856e 0%, #4a5d38 100%);">
                             <i class="fas fa-star mr-2 animate-pulse"></i> 50-60대 선착순 6분 한정 모집
                         </span>
                     </div>
@@ -342,7 +346,7 @@
                     </div>
                     
                     <!-- Main Title -->
-                    <h1 class="serif-font text-5xl sm:text-6xl lg:text-7xl font-black bg-gradient-to-r from-green-700 via-emerald-600 to-teal-600 bg-clip-text text-transparent leading-tight" data-aos="fade-up" data-aos-duration="1000">
+                    <h1 class="serif-font text-5xl sm:text-6xl lg:text-7xl font-black leading-tight" style="background: linear-gradient(135deg, #2a472f 0%, #4a5d38 50%, #78856e 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;" data-aos="fade-up" data-aos-duration="1000">
                         당신의 찬란한 '나'를 위한<br>
                         특별한 2박 3일 힐링 여정
                     </h1>
@@ -353,27 +357,32 @@
                     </div>
                     
                     <!-- Subtitle -->
-                    <p class="text-xl sm:text-2xl text-gray-600 leading-relaxed font-medium" data-aos="fade-up" data-aos-delay="200" data-aos-duration="1000">
-                        <span class="font-semibold text-amber-700">누군가의 엄마로, 아빠로, 혹은 한 자리를 묵묵히 지켜온</span> 당신에게—<br>
+                    <p class="text-xl sm:text-2xl leading-relaxed font-medium" style="color: #2a472f;" data-aos="fade-up" data-aos-delay="200" data-aos-duration="1000">
+                        <span class="font-semibold" style="color: #4a5d38;">누군가의 엄마로, 아빠로, 혹은 한 자리를 묵묵히 지켜온</span> 당신에게—<br>
                         이제는 오롯이 <span class="blink-text">'나'</span>를 위한 시간이 필요하지 않을까요?
                     </p>
                     
+                    <!-- Hero Image -->
+                    <div class="my-16" data-aos="fade-up" data-aos-delay="300" data-aos-duration="1000">
+                        <img src="hero-image.png" alt="힐링 리트릿 모습" class="rounded-2xl shadow-2xl w-full max-w-4xl mx-auto" style="border: 3px solid #ddd7c7;">
+                    </div>
+                    
                     <!-- Features -->
                     <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 mb-12 mt-24" data-aos="fade-up" data-aos-delay="400" data-aos-duration="1000">
-                        <div class="bg-white/80 backdrop-blur-sm rounded-xl p-4 shadow-lg hover-card">
-                            <i class="fas fa-leaf text-3xl text-green-600 mb-2"></i>
-                            <h3 class="font-semibold text-gray-800">자연 속 힐링</h3>
-                            <p class="text-sm text-gray-600">양평의 고요한 자연에서</p>
+                        <div class="backdrop-blur-sm rounded-xl p-4 shadow-lg hover-card" style="background-color: rgba(221, 215, 199, 0.8);">
+                            <i class="fas fa-leaf text-3xl mb-2" style="color: #4a5d38;"></i>
+                            <h3 class="font-semibold" style="color: #2a472f;">자연 속 힐링</h3>
+                            <p class="text-sm" style="color: #78856e;">양평의 고요한 자연에서</p>
                         </div>
-                        <div class="bg-white/80 backdrop-blur-sm rounded-xl p-4 shadow-lg hover-card">
-                            <i class="fas fa-heart text-3xl text-rose-500 mb-2"></i>
-                            <h3 class="font-semibold text-gray-800">감정 코칭</h3>
-                            <p class="text-sm text-gray-600">전문가와 함께하는 1:1 코칭</p>
+                        <div class="backdrop-blur-sm rounded-xl p-4 shadow-lg hover-card" style="background-color: rgba(221, 215, 199, 0.8);">
+                            <i class="fas fa-heart text-3xl mb-2" style="color: #78856e;"></i>
+                            <h3 class="font-semibold" style="color: #2a472f;">감정 코칭</h3>
+                            <p class="text-sm" style="color: #78856e;">전문가와 함께하는 1:1 코칭</p>
                         </div>
-                        <div class="bg-white/80 backdrop-blur-sm rounded-xl p-4 shadow-lg hover-card">
-                            <i class="fas fa-users text-3xl text-blue-600 mb-2"></i>
-                            <h3 class="font-semibold text-gray-800">소규모 프로그램</h3>
-                            <p class="text-sm text-gray-600">단 6명의 특별한 만남</p>
+                        <div class="backdrop-blur-sm rounded-xl p-4 shadow-lg hover-card" style="background-color: rgba(221, 215, 199, 0.8);">
+                            <i class="fas fa-users text-3xl mb-2" style="color: #4a5d38;"></i>
+                            <h3 class="font-semibold" style="color: #2a472f;">소규모 프로그램</h3>
+                            <p class="text-sm" style="color: #78856e;">단 6명의 특별한 만남</p>
                         </div>
                     </div>
                     
