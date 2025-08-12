@@ -549,9 +549,9 @@
                     </div>
                     
                     <!-- CTA Button -->
-                    <a href="https://forms.gle/EMeFoiGmYiFUNLpK8" target="_blank" class="inline-block premium-btn text-white font-bold py-5 px-12 rounded-full text-xl shadow-2xl pulse-glow transform hover:scale-110 transition-all duration-300" data-aos="zoom-in" data-aos-delay="600" data-aos-duration="1000">
+                    <button onclick="showApplicationForm()" class="premium-btn text-white font-bold py-5 px-12 rounded-full text-xl shadow-2xl pulse-glow transform hover:scale-110 transition-all duration-300" data-aos="zoom-in" data-aos-delay="600" data-aos-duration="1000">
                         지금 바로 신청하기 <i class="fas fa-arrow-right ml-2"></i>
-                    </a>
+                    </button>
                     
                     <!-- Scroll Down Indicator -->
                     <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 floating">
@@ -1103,10 +1103,9 @@
                     모든 과정은 안전하고 편안한 분위기에서 진행됩니다.<br>
                     <span class="text-yellow-200 font-semibold">문의: 010-3118-5870</span>
                 </p>
-                <!-- Google Form으로 직접 연결 -->
-                <a href="https://forms.gle/EMeFoiGmYiFUNLpK8" target="_blank" class="inline-block font-bold py-5 px-12 rounded-full text-xl shadow-2xl transform hover:scale-110 transition-all duration-300 urgency-pulse" style="background-color: #ddd7c7; color: #2a472f;">
+                <button onclick="showApplicationForm()" class="font-bold py-5 px-12 rounded-full text-xl shadow-2xl transform hover:scale-110 transition-all duration-300 urgency-pulse" style="background-color: #ddd7c7; color: #2a472f;">
                     지금 바로 신청하기 <i class="fas fa-arrow-right ml-2"></i>
-                </a>
+                </button>
             </div>
         </section>
         
@@ -1675,6 +1674,7 @@
                 birthdate: birthdate,
                 phone: formData.get('phone'),
                 email: formData.get('email'),
+                retreat_date: formData.get('retreat_date'),
                 motivation: formData.get('motivation'),
                 health: formData.get('health'),
                 requests: formData.get('requests'),
