@@ -1,4 +1,6 @@
 {
+  "buildCommand": "echo 'No build required'",
+  "outputDirectory": ".",
   "functions": {
     "api/*.js": {
       "maxDuration": 10
@@ -6,8 +8,8 @@
   },
   "rewrites": [
     {
-      "source": "/",
-      "destination": "/index.html"
+      "source": "/(.*)",
+      "destination": "/$1"
     }
   ]
 }
