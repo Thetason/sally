@@ -1558,9 +1558,8 @@
         // Initialize form with good UX
         document.addEventListener('DOMContentLoaded', function() {
             // EmailJS 초기화
-            // EmailJS에서 받은 Public Key를 아래에 입력하세요
             if (typeof emailjs !== 'undefined') {
-                emailjs.init('YOUR_PUBLIC_KEY'); // 여기에 EmailJS Public Key 입력
+                emailjs.init('vTXO9oQpgZrlZUwyh'); // EmailJS Public Key
             }
             
             // Birth year is already set to 1970 by default in HTML
@@ -1607,10 +1606,9 @@
                         date: new Date().toLocaleString('ko-KR')
                     };
                     
-                    // 아래 'YOUR_SERVICE_ID'와 'YOUR_TEMPLATE_ID'를 실제 값으로 교체하세요
                     await emailjs.send(
-                        'YOUR_SERVICE_ID',  // EmailJS에서 복사한 Service ID 입력
-                        'YOUR_TEMPLATE_ID',  // EmailJS에서 복사한 Template ID 입력
+                        'service_abc123',  // EmailJS Service ID
+                        'template_v766kpj',  // EmailJS Template ID
                         templateParams
                     );
                     console.log('이메일 전송 성공:', email);
