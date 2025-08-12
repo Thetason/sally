@@ -1100,6 +1100,36 @@
                 </button>
             </div>
         </section>
+        
+        <!-- Email Notification Section -->
+        <section class="py-16 px-4 sm:px-6 lg:px-8" style="background: linear-gradient(135deg, #f5f3f0 0%, #e8e3d3 100%);">
+            <div class="container mx-auto max-w-3xl text-center">
+                <div class="bg-white rounded-2xl shadow-xl p-8" data-aos="fade-up">
+                    <h3 class="text-2xl font-bold mb-4" style="color: #2a472f;">
+                        9월에 참석이 어려우신가요?
+                    </h3>
+                    <p class="text-lg mb-6" style="color: #78856e;">
+                        다른 달 진행 소식을 받고 싶으시다면 이메일을 남겨주세요.
+                    </p>
+                    <form id="emailNotificationForm" class="max-w-md mx-auto">
+                        <div class="flex flex-col sm:flex-row gap-3">
+                            <input type="email" 
+                                   placeholder="이메일 주소를 입력해주세요" 
+                                   required
+                                   class="flex-1 px-4 py-3 rounded-lg border-2 border-gray-300 focus:border-green-600 focus:outline-none">
+                            <button type="submit" 
+                                    class="px-6 py-3 rounded-lg font-semibold text-white transition-all hover:scale-105"
+                                    style="background: linear-gradient(135deg, #4a5d38 0%, #2a472f 100%);">
+                                소식 받기
+                            </button>
+                        </div>
+                    </form>
+                    <p class="text-sm text-gray-600 mt-4">
+                        * 이메일은 리트릿 소식 안내 목적으로만 사용됩니다.
+                    </p>
+                </div>
+            </div>
+        </section>
     </div>
 
     <!-- Application Form Page -->
@@ -1521,6 +1551,24 @@
         document.addEventListener('DOMContentLoaded', function() {
             // Birth year is already set to 1970 by default in HTML
             // This provides a good starting point for 50-60 age range
+        });
+        
+        // Email Notification Form Submission
+        document.getElementById('emailNotificationForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const email = e.target.querySelector('input[type="email"]').value;
+            
+            // Save to localStorage
+            let emailList = JSON.parse(localStorage.getItem('retreat_email_notifications') || '[]');
+            if (!emailList.includes(email)) {
+                emailList.push(email);
+                localStorage.setItem('retreat_email_notifications', JSON.stringify(emailList));
+            }
+            
+            // Show success message
+            alert('이메일이 등록되었습니다. 다음 리트릿 소식을 보내드리겠습니다.');
+            e.target.reset();
         });
         
         // Application Form Submission
