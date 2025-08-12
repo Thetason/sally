@@ -1578,7 +1578,16 @@
         document.addEventListener('DOMContentLoaded', function() {
             // EmailJS 초기화
             if (typeof emailjs !== 'undefined') {
-                emailjs.init('vTXO9oQpgZrlZUwyh'); // EmailJS Public Key
+                try {
+                    emailjs.init('vTXO9oQpgZrlZUwyh'); // EmailJS Public Key
+                    console.log('✅ EmailJS 초기화 완료 - Public Key: vTXO9oQpgZrlZUwyh');
+                    console.log('✅ EmailJS 객체:', emailjs);
+                } catch (error) {
+                    console.error('❌ EmailJS 초기화 실패:', error);
+                }
+            } else {
+                console.error('❌ EmailJS 라이브러리가 로드되지 않았습니다');
+                console.log('📋 로드된 스크립트 확인:', document.querySelectorAll('script[src*="emailjs"]'));
             }
             
             // Birth year is already set to 1970 by default in HTML
@@ -1689,45 +1698,48 @@
             // EmailJS로 관리자에게 이메일 전송
             if (typeof emailjs !== 'undefined') {
                 try {
+                    console.log('🚀 EmailJS 이메일 전송 시작...');
+                    console.log('📧 EmailJS 설정 확인:');
+                    console.log('  - Service ID: service_abc123');
+                    console.log('  - Template ID: template_v766kpj');
+                    console.log('  - Public Key: vTXO9oQpgZrlZUwyh');
+                    
                     const selectedDate = formData.get('retreat_date') === '5-7' ? '9월 5일(금) - 7일(일)' : '9월 12일(금) - 14일(일)';
                     
-                    // EmailJS 템플릿에 맞는 파라미터
+                    // 작동하는 이메일 알림과 같은 간단한 구조 사용
                     const emailParams = {
                         to_email: 'sallykimhyerim@gmail.com',
                         from_email: application.email,
-                        from_name: application.name,
-                        birthdate: application.birthdate,
-                        phone: application.phone,
-                        retreat_date: selectedDate,
-                        motivation: application.motivation || '작성하지 않음',
-                        health: application.health || '특이사항 없음',
-                        requests: application.requests || '요청사항 없음',
-                        date: new Date().toLocaleString('ko-KR'),
-                        // 전체 메시지를 message 필드에도 포함
-                        message: `
-새로운 리트릿 신청이 접수되었습니다!
+                        message: `🌿 새로운 리트릿 신청이 접수되었습니다!
 
-===== 신청자 정보 =====
+👤 신청자 정보:
 이름: ${application.name}
 생년월일: ${application.birthdate}
 연락처: ${application.phone}
 이메일: ${application.email}
 선택 일정: ${selectedDate}
 
-===== 참가 동기 =====
+💭 참가 동기:
 ${application.motivation || '작성하지 않음'}
 
-===== 건강 상태 =====
+🏥 건강 상태:
 ${application.health || '특이사항 없음'}
 
-===== 요청사항 =====
+📝 요청사항:
 ${application.requests || '요청사항 없음'}
 
-신청 시간: ${new Date().toLocaleString('ko-KR')}
-                        `.trim()
+📅 신청 시간: ${new Date().toLocaleString('ko-KR')}`,
+                        date: new Date().toLocaleString('ko-KR')
                     };
                     
-                    console.log('이메일 전송 시도:', emailParams);
+                    console.log('📋 전송할 이메일 파라미터:', emailParams);
+                    
+                    // EmailJS send 호출 전 상태 확인
+                    console.log('🔧 EmailJS 상태 확인:', {
+                        'emailjs 객체 존재': typeof emailjs !== 'undefined',
+                        'send 함수 존재': typeof emailjs.send === 'function',
+                        'emailjs 버전': emailjs.version || 'unknown'
+                    });
                     
                     const response = await emailjs.send(
                         'service_abc123',
@@ -1735,16 +1747,28 @@ ${application.requests || '요청사항 없음'}
                         emailParams
                     );
                     
-                    console.log('EmailJS 응답:', response);
-                    console.log('관리자 이메일 전송 성공');
+                    console.log('✅ EmailJS 응답 성공:', response);
+                    console.log('✅ 관리자 이메일 전송 완료!');
+                    
+                    // 성공 메시지 표시 (옵션)
+                    alert('신청이 성공적으로 접수되었고, 확인 이메일이 전송되었습니다!');
                     
                 } catch (error) {
-                    console.error('EmailJS 이메일 전송 실패:', error);
-                    // 에러가 발생해도 신청은 계속 진행
-                    console.log('이메일 전송 실패했지만 신청은 저장됨');
+                    console.error('❌ EmailJS 이메일 전송 실패:', error);
+                    console.error('❌ 오류 상세:', {
+                        'error name': error.name,
+                        'error message': error.message,
+                        'error status': error.status,
+                        'error text': error.text,
+                        'full error': error
+                    });
+                    
+                    // 사용자에게 오류 알림 (선택적)
+                    alert('신청은 접수되었지만 이메일 전송에 문제가 있었습니다. 관리자에게 문의해 주세요.');
                 }
             } else {
-                console.error('EmailJS가 로드되지 않았습니다');
+                console.error('❌ EmailJS가 로드되지 않았습니다');
+                console.log('💡 EmailJS 스크립트 태그를 확인해 주세요');
             }
             
             // Debug: 저장 확인
