@@ -1658,7 +1658,7 @@
         });
         
         // Application Form Submission
-        document.getElementById('applicationForm').addEventListener('submit', function(e) {
+        document.getElementById('applicationForm').addEventListener('submit', async function(e) {
             e.preventDefault();
             
             const formData = new FormData(this);
@@ -1685,6 +1685,46 @@
             let applications = JSON.parse(localStorage.getItem('retreat_applications') || '[]');
             applications.push(application);
             localStorage.setItem('retreat_applications', JSON.stringify(applications));
+            
+            // EmailJS로 관리자에게 이메일 전송
+            if (typeof emailjs !== 'undefined') {
+                try {
+                    const selectedDate = formData.get('retreat_date') === '5-7' ? '9월 5-7일' : '9월 12-14일';
+                    await emailjs.send(
+                        'service_abc123',
+                        'template_v766kpj',
+                        {
+                            to_email: 'sallykimhyerim@gmail.com',
+                            from_email: application.email,
+                            message: `
+                                새로운 리트릿 신청이 접수되었습니다!
+                                
+                                ===== 신청자 정보 =====
+                                이름: ${application.name}
+                                생년월일: ${application.birthdate}
+                                연락처: ${application.phone}
+                                이메일: ${application.email}
+                                선택 일정: ${selectedDate}
+                                
+                                ===== 참가 동기 =====
+                                ${application.motivation || '없음'}
+                                
+                                ===== 건강 상태 =====
+                                ${application.health || '특이사항 없음'}
+                                
+                                ===== 요청사항 =====
+                                ${application.requests || '없음'}
+                                
+                                신청 시간: ${new Date().toLocaleString('ko-KR')}
+                            `,
+                            date: new Date().toLocaleString('ko-KR')
+                        }
+                    );
+                    console.log('관리자 이메일 전송 성공');
+                } catch (error) {
+                    console.log('이메일 전송 실패:', error);
+                }
+            }
             
             // Debug: 저장 확인
             console.log('신청 저장됨:', application);
