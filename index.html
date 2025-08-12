@@ -1557,13 +1557,11 @@
 
         // Initialize form with good UX
         document.addEventListener('DOMContentLoaded', function() {
-            // EmailJS 초기화 (https://www.emailjs.com에서 무료 계정 생성 후 설정)
-            // 1. EmailJS 가입
-            // 2. Email Service 추가 (Gmail 선택)
-            // 3. Email Template 생성
-            // 4. Public Key 복사
-            
-            // emailjs.init('YOUR_PUBLIC_KEY'); // EmailJS Public Key 입력
+            // EmailJS 초기화
+            // EmailJS에서 받은 Public Key를 아래에 입력하세요
+            if (typeof emailjs !== 'undefined') {
+                emailjs.init('YOUR_PUBLIC_KEY'); // 여기에 EmailJS Public Key 입력
+            }
             
             // Birth year is already set to 1970 by default in HTML
             // This provides a good starting point for 50-60 age range
@@ -1598,26 +1596,28 @@
                 console.log('Email notification API error:', error);
             }
             
-            // EmailJS로 직접 이메일 전송 (백업)
-            // EmailJS 설정이 완료되면 아래 주석을 해제하세요
-            /*
+            // EmailJS로 직접 이메일 전송
+            // EmailJS 설정 후 아래 ID들을 입력하세요
             try {
                 if (typeof emailjs !== 'undefined') {
+                    const templateParams = {
+                        to_email: 'sallykimhyerim@gmail.com',
+                        from_email: email,
+                        message: `새로운 이메일 알림 신청: ${email}`,
+                        date: new Date().toLocaleString('ko-KR')
+                    };
+                    
+                    // 아래 'YOUR_SERVICE_ID'와 'YOUR_TEMPLATE_ID'를 실제 값으로 교체하세요
                     await emailjs.send(
-                        'YOUR_SERVICE_ID',  // EmailJS 서비스 ID
-                        'YOUR_TEMPLATE_ID',  // EmailJS 템플릿 ID
-                        {
-                            to_email: 'sallykimhyerim@gmail.com',
-                            from_email: email,
-                            message: `새로운 이메일 알림 신청: ${email}`,
-                            date: new Date().toLocaleString('ko-KR')
-                        }
+                        'YOUR_SERVICE_ID',  // EmailJS에서 복사한 Service ID 입력
+                        'YOUR_TEMPLATE_ID',  // EmailJS에서 복사한 Template ID 입력
+                        templateParams
                     );
+                    console.log('이메일 전송 성공:', email);
                 }
             } catch (emailError) {
-                console.log('EmailJS error:', emailError);
+                console.log('EmailJS 설정이 필요합니다:', emailError);
             }
-            */
             
             // Show success message
             alert('이메일이 등록되었습니다. 다음 리트릿 소식을 보내드리겠습니다.');
