@@ -25,28 +25,35 @@ export default async function handler(req, res) {
         });
       }
 
-      // Vercel KV에서 데이터 조회 (KV 설정 후 주석 해제)
-      // const kv = require('@vercel/kv');
-      // const applicationIds = await kv.lrange('applications', 0, -1);
-      // const applications = [];
-      // for (const id of applicationIds) {
-      //   const data = await kv.get(`application:${id}`);
-      //   if (data) applications.push(JSON.parse(data));
-      // }
+      // Vercel KV에서 데이터 조회
+      let applications = [];
       
-      // 임시 테스트 데이터
-      const applications = [
-        {
-          id: 1,
-          name: "테스트 신청자",
-          birthdate: "1970-01-01",
-          phone: "010-1234-5678",
-          email: "test@example.com",
-          retreat_date: "5-7",
-          motivation: "참가 동기 테스트",
-          timestamp: new Date().toISOString()
+      try {
+        const { kv } = await import('@vercel/kv');
+        const applicationIds = await kv.lrange('applications', 0, -1);
+        
+        for (const id of applicationIds) {
+          const data = await kv.get(`application:${id}`);
+          if (data) {
+            applications.push(typeof data === 'string' ? JSON.parse(data) : data);
+          }
         }
-      ];
+      } catch (kvError) {
+        console.log('KV not configured, using test data');
+        // KV가 설정되지 않은 경우 테스트 데이터 사용
+        applications = [
+          {
+            id: 1,
+            name: "테스트 신청자",
+            birthdate: "1970-01-01",
+            phone: "010-1234-5678",
+            email: "test@example.com",
+            retreat_date: "5-7",
+            motivation: "참가 동기 테스트",
+            timestamp: new Date().toISOString()
+          }
+        ];
+      }
       
       res.status(200).json({ 
         success: true,

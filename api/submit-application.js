@@ -18,11 +18,15 @@ export default async function handler(req, res) {
     try {
       const application = req.body;
       
-      // Vercel KV에 저장 (KV 설정 후 주석 해제)
-      // const kv = require('@vercel/kv');
-      // const id = Date.now().toString();
-      // await kv.set(`application:${id}`, JSON.stringify(application));
-      // await kv.lpush('applications', id);
+      // Vercel KV에 저장
+      try {
+        const { kv } = await import('@vercel/kv');
+        const id = Date.now().toString();
+        await kv.set(`application:${id}`, JSON.stringify(application));
+        await kv.lpush('applications', id);
+      } catch (kvError) {
+        console.log('KV not configured, using fallback');
+      }
       
       // 임시로 메모리에 저장 (개발용)
       // 실제 배포시에는 Vercel KV 사용
