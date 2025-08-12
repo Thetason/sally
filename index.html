@@ -23,6 +23,9 @@
     <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-firestore-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-auth-compat.js"></script>
     
+    <!-- EmailJS -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    
     <style>
         :root {
             --primary-green: #2a472f;
@@ -1554,12 +1557,20 @@
 
         // Initialize form with good UX
         document.addEventListener('DOMContentLoaded', function() {
+            // EmailJS 초기화 (https://www.emailjs.com에서 무료 계정 생성 후 설정)
+            // 1. EmailJS 가입
+            // 2. Email Service 추가 (Gmail 선택)
+            // 3. Email Template 생성
+            // 4. Public Key 복사
+            
+            // emailjs.init('YOUR_PUBLIC_KEY'); // EmailJS Public Key 입력
+            
             // Birth year is already set to 1970 by default in HTML
             // This provides a good starting point for 50-60 age range
         });
         
         // Email Notification Form Submission
-        document.getElementById('emailNotificationForm').addEventListener('submit', function(e) {
+        document.getElementById('emailNotificationForm').addEventListener('submit', async function(e) {
             e.preventDefault();
             
             const email = e.target.querySelector('input[type="email"]').value;
@@ -1570,6 +1581,43 @@
                 emailList.push(email);
                 localStorage.setItem('retreat_email_notifications', JSON.stringify(emailList));
             }
+            
+            // API로 이메일 알림 전송 (Vercel 서버리스 함수)
+            try {
+                await fetch('/api/email-notification', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ 
+                        email: email,
+                        timestamp: new Date().toISOString()
+                    })
+                });
+            } catch (error) {
+                console.log('Email notification API error:', error);
+            }
+            
+            // EmailJS로 직접 이메일 전송 (백업)
+            // EmailJS 설정이 완료되면 아래 주석을 해제하세요
+            /*
+            try {
+                if (typeof emailjs !== 'undefined') {
+                    await emailjs.send(
+                        'YOUR_SERVICE_ID',  // EmailJS 서비스 ID
+                        'YOUR_TEMPLATE_ID',  // EmailJS 템플릿 ID
+                        {
+                            to_email: 'sallykimhyerim@gmail.com',
+                            from_email: email,
+                            message: `새로운 이메일 알림 신청: ${email}`,
+                            date: new Date().toLocaleString('ko-KR')
+                        }
+                    );
+                }
+            } catch (emailError) {
+                console.log('EmailJS error:', emailError);
+            }
+            */
             
             // Show success message
             alert('이메일이 등록되었습니다. 다음 리트릿 소식을 보내드리겠습니다.');
