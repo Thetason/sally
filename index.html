@@ -1467,7 +1467,9 @@
                         </div>
                     </div>
                     
-                    <div class="overflow-x-auto">
+                    <!-- 참가 신청자 테이블 -->
+                    <h2 class="text-2xl font-bold text-gray-800 mb-4">참가 신청자</h2>
+                    <div class="overflow-x-auto mb-8">
                         <table class="w-full table-auto">
                             <thead>
                                 <tr class="bg-gray-100">
@@ -1482,6 +1484,23 @@
                             </thead>
                             <tbody id="applicationsTable">
                                 <!-- Applications will be inserted here -->
+                            </tbody>
+                        </table>
+                    </div>
+                    
+                    <!-- 9월 참석 어려운 분들 이메일 목록 -->
+                    <h2 class="text-2xl font-bold text-gray-800 mb-4">9월 참석이 어려운 분들 (다음 회차 알림 신청)</h2>
+                    <div class="overflow-x-auto">
+                        <table class="w-full table-auto">
+                            <thead>
+                                <tr class="bg-gray-100">
+                                    <th class="px-4 py-3 text-left">번호</th>
+                                    <th class="px-4 py-3 text-left">이메일 주소</th>
+                                    <th class="px-4 py-3 text-left">등록 일시</th>
+                                </tr>
+                            </thead>
+                            <tbody id="emailNotificationsTable">
+                                <!-- Email notifications will be inserted here -->
                             </tbody>
                         </table>
                     </div>
@@ -1573,10 +1592,20 @@
             
             const email = e.target.querySelector('input[type="email"]').value;
             
-            // Save to localStorage
+            // Save to localStorage with timestamp
             let emailList = JSON.parse(localStorage.getItem('retreat_email_notifications') || '[]');
-            if (!emailList.includes(email)) {
-                emailList.push(email);
+            
+            // 중복 체크 및 객체 형태로 저장
+            const emailExists = emailList.some(item => 
+                (typeof item === 'string' && item === email) || 
+                (typeof item === 'object' && item.email === email)
+            );
+            
+            if (!emailExists) {
+                emailList.push({
+                    email: email,
+                    timestamp: new Date().toISOString()
+                });
                 localStorage.setItem('retreat_email_notifications', JSON.stringify(emailList));
             }
             
@@ -1698,9 +1727,46 @@
             document.getElementById('landingPage').classList.remove('active');
             document.getElementById('adminDashboard').classList.add('active');
             loadApplications();
+            loadEmailNotifications();
             window.scrollTo(0, 0);
         }
 
+        function loadEmailNotifications() {
+            const emailList = JSON.parse(localStorage.getItem('retreat_email_notifications') || '[]');
+            const tbody = document.getElementById('emailNotificationsTable');
+            
+            // Clear table
+            tbody.innerHTML = '';
+            
+            // 이메일 목록이 없을 경우 메시지 표시
+            if (emailList.length === 0) {
+                tbody.innerHTML = '<tr><td colspan="3" class="px-4 py-8 text-center text-gray-500">아직 이메일 알림 신청이 없습니다.</td></tr>';
+                return;
+            }
+            
+            // Add emails to table
+            emailList.forEach((email, index) => {
+                const row = document.createElement('tr');
+                row.className = 'border-b hover:bg-gray-50';
+                
+                // 이메일이 객체인 경우와 문자열인 경우 모두 처리
+                let emailAddress = email;
+                let timestamp = new Date().toLocaleString('ko-KR');
+                
+                if (typeof email === 'object' && email.email) {
+                    emailAddress = email.email;
+                    timestamp = email.timestamp ? new Date(email.timestamp).toLocaleString('ko-KR') : timestamp;
+                }
+                
+                row.innerHTML = `
+                    <td class="px-4 py-3">${index + 1}</td>
+                    <td class="px-4 py-3 font-semibold">${emailAddress}</td>
+                    <td class="px-4 py-3">${timestamp}</td>
+                `;
+                tbody.appendChild(row);
+            });
+        }
+        
         function loadApplications() {
             const applications = JSON.parse(localStorage.getItem('retreat_applications') || '[]');
             const tbody = document.getElementById('applicationsTable');
