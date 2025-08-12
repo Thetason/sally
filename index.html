@@ -1596,9 +1596,9 @@
             }
             
             // EmailJS로 직접 이메일 전송
-            // EmailJS 설정 후 아래 ID들을 입력하세요
             try {
                 if (typeof emailjs !== 'undefined') {
+                    console.log('EmailJS 전송 시작...');
                     const templateParams = {
                         to_email: 'sallykimhyerim@gmail.com',
                         from_email: email,
@@ -1606,15 +1606,21 @@
                         date: new Date().toLocaleString('ko-KR')
                     };
                     
-                    await emailjs.send(
+                    console.log('템플릿 파라미터:', templateParams);
+                    
+                    const response = await emailjs.send(
                         'service_abc123',  // EmailJS Service ID
                         'template_v766kpj',  // EmailJS Template ID
                         templateParams
                     );
-                    console.log('이메일 전송 성공:', email);
+                    console.log('이메일 전송 성공:', response);
+                    console.log('전송된 이메일:', email);
+                } else {
+                    console.error('EmailJS가 로드되지 않았습니다');
                 }
             } catch (emailError) {
-                console.log('EmailJS 설정이 필요합니다:', emailError);
+                console.error('EmailJS 오류 상세:', emailError);
+                alert('이메일 전송 중 오류가 발생했습니다. 콘솔을 확인하세요.');
             }
             
             // Show success message
